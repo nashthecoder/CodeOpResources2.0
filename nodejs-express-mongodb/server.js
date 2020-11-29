@@ -10,11 +10,23 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
+const db = require("./app/models");
+db.mongoose 
+    .connect(db.url, {
+        useNewUrlParser: true,
+        useUnifiedTologogy: true
+    })
+    .then(() => {
+        console.log("Connected to the database!");
+    })
+    .catch(err = {
+        console.log("Cannot connect to the database!", err);
+    });
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser,urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true}));
 
 //simple route
 app.get("/" , (req, res) => {
